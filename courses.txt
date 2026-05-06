@@ -1,0 +1,20 @@
+FIT HW,Physical Activity Towards Health and Fitness (Health and Wellness),2.0,First Year,First Semester,94
+GHIST,Readings in Philippine History,3.0,First Year,First Semester,88
+GSELF,Understanding the Self,3.0,First Year,First Semester,86
+GART,Art Appreciation,3.0,First Year,First Semester,85
+CFE 101,God’s Journey with His People,3.0,First Year,First Semester,85
+IT 111,Introduction to Computing,2.0,First Year,First Semester,80
+IT 111L,Introduction to Computing (Lab),1.0,First Year,First Semester,80
+IT 112,Computer Programming 1,2.0,First Year,First Semester,79
+IT 112L,Computer Programming 1 (Lab),1.0,First Year,First Semester,79
+IT 113,Discrete Mathematics,3.0,First Year,First Semester,80
+IT 121,Information System Fundamentals,3.0,First Year,Second Semester,Not yet taken
+IT 122,Computer Programming 2,2.0,First Year,Second Semester,Not yet taken
+IT 122L,Computer Programming 2 (Lab),1.0,First Year,Second Semester,Not yet taken
+IT 123,Platform Technologies,2.0,First Year,Second Semester,Not yet taken
+IT 123L,Platform Technologies (Lab),1.0,First Year,Second Semester,Not yet taken
+GMATH,Mathematics in the Modern World,3.0,First Year,Second Semester,Not yet taken
+GPCOM,Purposive Communication,3.0,First Year,Second Semester,Not yet taken
+GCWORLD,The Contemporary World,3.0,First Year,Second Semester,Not yet taken
+FIT CS,Physical Activity Towards Health and Fitness (Combative Sports),2.0,First Year,Second Semester,Not yet taken
+CFE 102,Christian Morality in Our Times,3.0,First Year,Second Semester,Not yet taken
