@@ -3,6 +3,10 @@ import java.util.Comparator;
 import java.util.Scanner;
 
 public class CourseManager {
+    private static final int CODE_WIDTH = 10;
+    private static final int TITLE_WIDTH_NO_GRADE = 45;
+    private static final int TITLE_WIDTH_WITH_GRADE = 36;
+
     private ArrayList<Course> courses;
 
     public CourseManager(ArrayList<Course> courses) {
@@ -35,11 +39,13 @@ public class CourseManager {
                 currentTerm = c.term;
 
                 System.out.println("Year = " + currentYear + " Term = " + currentTerm);
-                System.out.println("Course No\tDescriptive title\tUnits");
-                System.out.println("------------------------------------------------------------------------------------------------------");
+                System.out.printf("%-" + CODE_WIDTH + "s %-" + TITLE_WIDTH_NO_GRADE + "s %6s%n",
+                        "Course No", "Descriptive title", "Units");
+                System.out.println("--------------------------------------------------------------------------------------");
             }
 
-            System.out.println(c.code + "\t" + c.title + "\t" + c.units);
+            System.out.printf("%-" + CODE_WIDTH + "s %-" + TITLE_WIDTH_NO_GRADE + "s %6.1f%n",
+                    c.code, fitToWidth(c.title, TITLE_WIDTH_NO_GRADE), c.units);
         }
 
         System.out.println("Press enter key to go back to the menu.");
@@ -65,19 +71,21 @@ public class CourseManager {
                 if (!currentYear.isEmpty()) {
                     System.out.println("Press enter key to see courses for the next term.");
                     scanner.nextLine();
-                    System.out.println("------------------------------------------------------------------------------------------------");
+                    System.out.println("---------------------------------------------------------------------------------------");
                 }
 
                 currentYear = c.year;
                 currentTerm = c.term;
 
                 System.out.println("Year = " + currentYear + " Term = " + currentTerm);
-                System.out.println("Course No.\tDescriptive title\tUnits\tGrade");
-                System.out.println("------------------------------------------------------------------------------------------------");
+                System.out.printf("%-" + CODE_WIDTH + "s %-" + TITLE_WIDTH_WITH_GRADE + "s %6s %15s%n",
+                        "Course No.", "Descriptive title", "Units", "Grade");
+                System.out.println("---------------------------------------------------------------------------------------");
             }
 
             String gradeToShow = c.grade == null || c.grade.isEmpty() ? "Not yet taken" : c.grade;
-            System.out.println(c.code + "\t" + c.title + "\t" + c.units + "\t" + gradeToShow);
+            System.out.printf("%-" + CODE_WIDTH + "s %-" + TITLE_WIDTH_WITH_GRADE + "s %6.1f %15s%n",
+                    c.code, fitToWidth(c.title, TITLE_WIDTH_WITH_GRADE), c.units, fitToWidth(gradeToShow, 15));
         }
 
         System.out.println("Press enter key to go back to the menu.");
@@ -168,5 +176,18 @@ public class CourseManager {
             return yearCompare;
         }
         return a.term.compareToIgnoreCase(b.term);
+    }
+
+    private String fitToWidth(String value, int width) {
+        if (value == null) {
+            return "";
+        }
+        if (value.length() <= width) {
+            return value;
+        }
+        if (width <= 3) {
+            return value.substring(0, width);
+        }
+        return value.substring(0, width - 3) + "...";
     }
 }

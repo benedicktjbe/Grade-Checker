@@ -1,4 +1,4 @@
-FIT HW,Physical Activity Towards Health and Fitness (Health and Wellness),2.0,First Year,First Semester,94
+FIT HW,Physical Activity Towards Health and Fitness (Health and Wellness),2.0,First Year,First Semester,95
 GHIST,Readings in Philippine History,3.0,First Year,First Semester,88
 GSELF,Understanding the Self,3.0,First Year,First Semester,86
 GART,Art Appreciation,3.0,First Year,First Semester,85
@@ -16,5 +16,5 @@ IT 123L,Platform Technologies (Lab),1.0,First Year,Second Semester,Not yet taken
 GMATH,Mathematics in the Modern World,3.0,First Year,Second Semester,Not yet taken
 GPCOM,Purposive Communication,3.0,First Year,Second Semester,Not yet taken
 GCWORLD,The Contemporary World,3.0,First Year,Second Semester,Not yet taken
-FIT CS,Physical Activity Towards Health and Fitness (Combative Sports),2.0,First Year,Second Semester,Not yet taken
+FIT CS,Physical Activity Towards Health and Fitness (Combative Sports),2.0,First Year,Second Semester,95
 CFE 102,Christian Morality in Our Times,3.0,First Year,Second Semester,Not yet taken
