@@ -22,29 +22,32 @@ public class CourseManager {
 
         courses.sort(this::compareByYearAndTerm);
 
-        String currentYear = "";
-        String currentTerm = "";
+        final String HEADER_FORMAT = "%-" + CODE_WIDTH + "s %-" + TITLE_WIDTH_NO_GRADE + "s %6s%n";
+        final String ROW_FORMAT    = "%-" + CODE_WIDTH + "s %-" + TITLE_WIDTH_NO_GRADE + "s %6.1f%n";
+        final String DIVIDER       = "-".repeat(CODE_WIDTH + TITLE_WIDTH_NO_GRADE + 8);
+
+        String currentYear = null;
+        String currentTerm = null;
 
         for (Course c : courses) {
+            boolean newGroup = !c.year.equals(currentYear) || !c.term.equals(currentTerm);
 
-            if (!c.year.equals(currentYear) || !c.term.equals(currentTerm)) {
-                if (!currentYear.isEmpty()) {
+            if (newGroup) {
+                if (currentYear != null) {
                     System.out.println("Press enter key to see courses for the next term.");
                     scanner.nextLine();
-                    System.out.println("------------------------------------------------------------------------------------------------------");
+                    System.out.println(DIVIDER);
                 }
 
                 currentYear = c.year;
                 currentTerm = c.term;
 
-                System.out.println("Year = " + currentYear + " Term = " + currentTerm);
-                System.out.printf("%-" + CODE_WIDTH + "s %-" + TITLE_WIDTH_NO_GRADE + "s %6s%n",
-                        "Course No", "Descriptive title", "Units");
-                System.out.println("--------------------------------------------------------------------------------------");
+                System.out.printf("Year = %s  Term = %s%n", currentYear, currentTerm);
+                System.out.printf(HEADER_FORMAT, "Course No.", "Descriptive title", "Units");
+                System.out.println(DIVIDER);
             }
 
-            System.out.printf("%-" + CODE_WIDTH + "s %-" + TITLE_WIDTH_NO_GRADE + "s %6.1f%n",
-                    c.code, fitToWidth(c.title, TITLE_WIDTH_NO_GRADE), c.units);
+            System.out.printf(ROW_FORMAT, c.code, fitToWidth(c.title, TITLE_WIDTH_NO_GRADE), c.units);
         }
 
         System.out.println("Press enter key to go back to the menu.");
