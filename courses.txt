@@ -45,3 +45,7 @@ GRVA,Reading Visual Art,3.0,Second Year,Second Semester,Not yet taken
 NSTP-CWTS 2,Social Awareness and Empowerment for Service,3.0,Second Year,Second Semester,Not yet taken
 FIT AQ,Physical Activity Towards Health and Fitness (Aquatics),2.0,Second Year,Second Semester,Not yet taken
 CFE 104,CICM Mission Identity,3.0,Second Year,Second Semester,Not yet taken
+
+CS 314,Social and Personal Development in the ICT Workplace,3.0,Second Year, Short Term,Not yet taken
+CS 315,Technology-Assisted Presentation and Presentation,3.0,Second Year,Short Term,Not yet taken
+GETHICS,Ethics,3.0,Second Year,Short Term,Not yet taken
