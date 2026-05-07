@@ -174,12 +174,31 @@ public class CourseManager {
         return courses;
     }
 
+    private int yearOrder(String year) {
+        switch (year.trim().toLowerCase()) {
+            case "first year":   return 1;
+            case "second year":  return 2;
+            case "third year":   return 3;
+            case "fourth year":  return 4;
+            default:             return Integer.MAX_VALUE;
+        }
+    }
+
+    private int termOrder(String term) {
+        switch (term.trim().toLowerCase()) {
+            case "first semester":   return 1;
+            case "second semester":  return 2;
+            case "summer":           return 3;
+            default:                 return Integer.MAX_VALUE;
+        }
+    }
+
     private int compareByYearAndTerm(Course a, Course b) {
-        int yearCompare = a.year.compareToIgnoreCase(b.year);
+        int yearCompare = Integer.compare(yearOrder(a.year), yearOrder(b.year));
         if (yearCompare != 0) {
             return yearCompare;
         }
-        return a.term.compareToIgnoreCase(b.term);
+        return Integer.compare(termOrder(a.term), termOrder(b.term));
     }
 
     private String fitToWidth(String value, int width) {
