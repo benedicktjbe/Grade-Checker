@@ -25,8 +25,7 @@ public class CourseManager {
         String currentYear = "";
         String currentTerm = "";
 
-        for (int i = 0; i < courses.size(); i++) {
-            Course c = courses.get(i);
+        for (Course c : courses) {
 
             if (!c.year.equals(currentYear) || !c.term.equals(currentTerm)) {
                 if (!currentYear.isEmpty()) {
@@ -61,31 +60,33 @@ public class CourseManager {
 
         courses.sort(this::compareByYearAndTerm);
 
-        String currentYear = "";
-        String currentTerm = "";
+        final String HEADER_FORMAT = "%-" + CODE_WIDTH + "s %-" + TITLE_WIDTH_WITH_GRADE + "s %6s %15s%n";
+        final String ROW_FORMAT    = "%-" + CODE_WIDTH + "s %-" + TITLE_WIDTH_WITH_GRADE + "s %6.1f %15s%n";
+        final String DIVIDER       = "-".repeat(87);
 
-        for (int i = 0; i < courses.size(); i++) {
-            Course c = courses.get(i);
+        String currentYear = null;
+        String currentTerm = null;
 
-            if (!c.year.equals(currentYear) || !c.term.equals(currentTerm)) {
-                if (!currentYear.isEmpty()) {
+        for (Course c : courses) {
+            boolean newGroup = !c.year.equals(currentYear) || !c.term.equals(currentTerm);
+
+            if (newGroup) {
+                if (currentYear != null) {
                     System.out.println("Press enter key to see courses for the next term.");
                     scanner.nextLine();
-                    System.out.println("---------------------------------------------------------------------------------------");
+                    System.out.println(DIVIDER);
                 }
 
                 currentYear = c.year;
                 currentTerm = c.term;
 
-                System.out.println("Year = " + currentYear + " Term = " + currentTerm);
-                System.out.printf("%-" + CODE_WIDTH + "s %-" + TITLE_WIDTH_WITH_GRADE + "s %6s %15s%n",
-                        "Course No.", "Descriptive title", "Units", "Grade");
-                System.out.println("---------------------------------------------------------------------------------------");
+                System.out.printf("Year = %s  Term = %s%n", currentYear, currentTerm);
+                System.out.printf(HEADER_FORMAT, "Course No.", "Descriptive title", "Units", "Grade");
+                System.out.println(DIVIDER);
             }
 
-            String gradeToShow = c.grade == null || c.grade.isEmpty() ? "Not yet taken" : c.grade;
-            System.out.printf("%-" + CODE_WIDTH + "s %-" + TITLE_WIDTH_WITH_GRADE + "s %6.1f %15s%n",
-                    c.code, fitToWidth(c.title, TITLE_WIDTH_WITH_GRADE), c.units, fitToWidth(gradeToShow, 15));
+            String grade = (c.grade == null || c.grade.isEmpty()) ? "Not yet taken" : c.grade;
+            System.out.printf(ROW_FORMAT, c.code, fitToWidth(c.title, TITLE_WIDTH_WITH_GRADE), c.units, fitToWidth(grade, 15));
         }
 
         System.out.println("Press enter key to go back to the menu.");
@@ -137,21 +138,21 @@ public class CourseManager {
 
     // Calculate GPA (average grade)
     public void calculateGPA() {
-        double total = 0;
-        double totalUnits = 0;
+        double weightedSum = 0;
+        double totalUnits  = 0;
 
         for (Course c : courses) {
-            double g = c.getNumericGrade();
-            if (g >= 0) {
-                total += g * c.units;
-                totalUnits += c.units;
+            double grade = c.getNumericGrade();
+            if (grade >= 0) {
+                weightedSum += grade * c.units;
+                totalUnits  += c.units;
             }
         }
 
         if (totalUnits == 0) {
             System.out.println("No grades available.");
         } else {
-            System.out.println("GPA: " + (total / totalUnits));
+            System.out.printf("GPA: %.2f%n", weightedSum / totalUnits);
         }
     }
 
@@ -160,10 +161,10 @@ public class CourseManager {
         courses.sort(Comparator.comparingDouble(Course::getNumericGrade).reversed());
 
         System.out.println("\nCourses sorted by grade:");
-        for (Course c : courses) {
-            String gradeToShow = c.grade == null || c.grade.isEmpty() ? "Not yet taken" : c.grade;
-            System.out.println(c.code + " | " + gradeToShow);
-        }
+        courses.forEach(c -> {
+            String grade = (c.grade == null || c.grade.isEmpty()) ? "Not yet taken" : c.grade;
+            System.out.printf("%-" + CODE_WIDTH + "s | %s%n", c.code, grade);
+        });
     }
 
     public ArrayList<Course> getCourses() {
