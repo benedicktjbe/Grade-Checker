@@ -98,30 +98,31 @@ public class CourseManager {
 
     // Enter grade for a course
     public void enterGrade(String code, String grade) {
+
+        if (!isValidGrade(grade)) {
+            System.out.println("Invalid grade. Enter 0–100 or \"Not yet taken\".");
+            return;
+        }
         for (Course c : courses) {
+
             if (c.code.equalsIgnoreCase(code)) {
-
-                // Allow "Not yet taken" explicitly
-                if (!grade.equalsIgnoreCase("Not yet taken")) {
-                    // Validate numeric grade
-                    try {
-                        double g = Double.parseDouble(grade);
-                        if (g < 0 || g > 100) {
-                            System.out.println("Invalid grade range.");
-                            return;
-                        }
-                    } catch (Exception e) {
-                        System.out.println("Invalid grade input.");
-                        return;
-                    }
-                }
-
                 c.grade = grade;
                 System.out.println("Grade updated.");
                 return;
             }
         }
         System.out.println("Course not found.");
+    }
+
+    private boolean isValidGrade(String grade) {
+        if (grade.equalsIgnoreCase("Not yet taken")) return true;
+        try {
+            double g = Double.parseDouble(grade);
+            return g >= 0 && g <= 100;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+
     }
 
     // Edit course details
