@@ -80,13 +80,13 @@ public class Main {
 
     private static int readMenuChoice(Scanner scanner, int min, int max) {
         while (true) {
-            System.out.print("Enter a number corresponding to your choice: ");
+            System.out.printf("Enter your choice (%d-%d): ", min, max);
             try {
                 int value = Integer.parseInt(scanner.nextLine().trim());
                 if (value >= min && value <= max) return value;
-                System.out.printf("The number must be from %d to %d.%n", min, max);
+                System.out.printf("Please enter a number from %d to %d.%n", min, max);
             } catch (NumberFormatException e) {
-                System.out.println("You entered an invalid integer. Please enter integer:");
+                System.out.println("Invalid input. Please enter a whole number.");
             }
         }
     }
