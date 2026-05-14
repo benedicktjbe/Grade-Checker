@@ -29,8 +29,31 @@ public class Main {
                 case 3 -> {
                     System.out.print("Enter course code: ");
                     String code = scanner.nextLine().trim();
-                    System.out.print("Enter grade (0-100, or 'Not yet taken'): ");
-                    manager.enterGrade(code, scanner.nextLine().trim());
+
+                    int grade;
+                    while(true){
+                        System.out.print("Enter grade (65-100, or 'Not yet taken'): ");
+                        String input = scanner.nextLine().trim();
+                        if (input.equals("Not yet taken")) {
+                            manager.enterGrade(code,input);
+                            break;
+                        }
+                        try {
+                            grade = Integer.parseInt(input);
+                            if (grade < 0 || grade > 100) {
+                                System.out.println("Grade must be between 0 and 100");
+                            continue;
+                            }
+                            if (grade < 65) {
+                                System.out.println("Grade must no be lower than 65.");
+                                continue;
+                            }
+                            manager.enterGrade(code,String.valueOf(grade));
+                            break;
+                        } catch (NumberFormatException e){
+                            System.out.println("Invalid input. Enter grade from 65 to 100 or 'Not yet taken'");
+                        }
+                    }
                     saveCoursesToFile(manager.getCourses());
                 }
                 case 4 -> {
